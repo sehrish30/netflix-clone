@@ -1,7 +1,5 @@
 import Head from "next/head";
-import Image from "next/image";
 import Banner from "../components/banner/banner.component.jsx";
-import Card from "../components/card/card.component.jsx";
 import SectionCards from "../components/card/section-cards.component.jsx";
 import Navbar from "../components/nav/navbar.component.jsx";
 import { getVideos, getPopularVideos } from "../lib/videos.js";

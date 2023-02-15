@@ -1,15 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "./navbar.module.css";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import Image from "next/image";
+import { magic } from "../../lib/magic-client";
 
-const Navbar = ({ username }) => {
+const Navbar = () => {
   const [showDropDown, setShowDropDown] = useState(false);
+  const [username, setUsername] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    async function getUserData() {
+      try {
+        const { email, publicAddress } = await magic.user.getMetadata();
+        if (email) {
+          setUsername(email);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    getUserData();
+  }, []);
 
   const toggleDropDown = () => {
     setShowDropDown((prev) => !prev);
+  };
+
+  const handleSignOut = async (e) => {
+    e.preventDefault();
+    try {
+      await magic.user.logout();
+    } catch (err) {
+      console.log(err);
+    }
+    router.replace("/login");
   };
 
   const handleOnClickHome = (e) => {
@@ -67,9 +93,9 @@ const Navbar = ({ username }) => {
             {showDropDown && (
               <div className={styles.navDropdown}>
                 <div>
-                  <Link href="/login" className={styles.linkName}>
+                  <button onClick={handleSignOut} className={styles.linkName}>
                     Sign out
-                  </Link>
+                  </button>
                   <div className={styles.lineWrapper}></div>
                 </div>
               </div>
