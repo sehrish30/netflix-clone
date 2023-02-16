@@ -5,23 +5,6 @@ import Navbar from "../components/nav/navbar.component.jsx";
 import { getVideos, getPopularVideos } from "../lib/videos.js";
 import styles from "../styles/Home.module.css";
 
-export async function getServerSideProps() {
-  // get videos on server side and pass it as props to page
-  const disneyVideos = await getVideos("disney trailer");
-  const travelVideos = await getVideos("Productivity");
-  const productivityVideos = await getVideos("travel");
-  const popularVideos = await getPopularVideos();
-
-  return {
-    props: {
-      disneyVideos,
-      travelVideos,
-      productivityVideos,
-      popularVideos,
-    },
-  };
-}
-
 export default function Home(initialProps) {
   const { disneyVideos, travelVideos, productivityVideos, popularVideos } =
     initialProps;
@@ -40,6 +23,7 @@ export default function Home(initialProps) {
           title="Clify"
           subTitle="Very subtitle"
           imgUrl="/static/clifford.webp"
+          videoId="4zH5iYM4wJo"
         />
         <div className={styles.sectionWrapper}>
           <SectionCards size="large" title="Disney" videos={disneyVideos} />
@@ -54,4 +38,21 @@ export default function Home(initialProps) {
       </div>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  // get videos on server side and pass it as props to page
+  const disneyVideos = await getVideos("disney trailer");
+  const travelVideos = await getVideos("Productivity");
+  const productivityVideos = await getVideos("travel");
+  const popularVideos = await getPopularVideos();
+
+  return {
+    props: {
+      disneyVideos,
+      travelVideos,
+      productivityVideos,
+      popularVideos,
+    },
+  };
 }
