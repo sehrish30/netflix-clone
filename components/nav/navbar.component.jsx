@@ -65,8 +65,6 @@ const Navbar = () => {
             />
           </div>
         </Link>
-
-        <p>{username}</p>
         <ul className={styles.navItems}>
           <li className={styles.navItem} onClick={handleOnClickHome}>
             Home

@@ -18,7 +18,7 @@ export default function Home(initialProps) {
       </Head>
 
       <div className={styles.main}>
-        <Navbar username="ankita@gmail.com" />
+        <Navbar  />
         <Banner
           title="Clify"
           subTitle="Very subtitle"
@@ -42,7 +42,7 @@ export default function Home(initialProps) {
 
 export async function getServerSideProps() {
   // get videos on server side and pass it as props to page
-  const disneyVideos = await getVideos("disney trailer");
+  const disneyVideos = await getVideos("disney");
   const travelVideos = await getVideos("Productivity");
   const productivityVideos = await getVideos("travel");
   const popularVideos = await getPopularVideos();
