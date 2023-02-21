@@ -48,6 +48,7 @@ const Login = () => {
               showUI: false,
             });
             if (didToken) {
+              setEmailSent(false);
               const response = await fetch("/api/login", {
                 method: "POST",
                 headers: {
@@ -57,7 +58,6 @@ const Login = () => {
               });
               const loggedInResponse = await response.json();
               if (loggedInResponse.done) {
-                console.log({ loggedInResponse });
                 router.replace("/");
               } else {
                 setIsLoading(false);

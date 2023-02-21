@@ -130,6 +130,7 @@
   padding-left: 1rem /* 48px */;
 }
 
+/**Like dislike code*/
 .btnWrapper {
   border-color: var(--white10);
   border-style: solid;
