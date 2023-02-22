@@ -6,7 +6,7 @@ import { getYoutubeVideoById } from "../../lib/videos";
 import Navbar from "../../components/nav/navbar.component";
 import Like from "../../components/icons/like-icon.component";
 import DisLike from "../../components/icons/dislike-icon.component";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 //  Make sure to bind modal to your appElement for accessibility
 Modal.setAppElement("#__next");
@@ -33,15 +33,55 @@ const VideoIdPage = (initialProps) => {
     statistics: { viewCount } = { viewCount: 0 },
   } = video;
 
-  const handleToggleLike = () => {
-    setToggleDisLike(toggleLike);
-    setToggleLike((prev) => !prev);
+  const runRatingService = async (favourited) => {
+    return await fetch("/api/stats", {
+      method: "POST",
+      body: JSON.stringify({
+        videoId,
+        favourited,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
-  const handleToggleDisLike = () => {
+  const handleToggleLike = async () => {
+    const favorutied = !toggleLike;
     setToggleDisLike(toggleLike);
     setToggleLike((prev) => !prev);
+
+    const response = await runRatingService(favorutied ? 1 : 0);
+    console.log("data", await response.json());
   };
+
+  const handleToggleDisLike = async () => {
+    const Unfavorutied = !toggleDisLike;
+    setToggleLike(toggleDisLike);
+    setToggleDisLike((prev) => !prev);
+    const response = await runRatingService(Unfavorutied ? 0 : 1);
+
+    console.log("data", await response.json());
+  };
+
+  useEffect(() => {
+    async function getStats() {
+      const response = await fetch(`/api/stats?videoId=${videoId}`, {
+        method: "GET",
+      });
+      const data = await response.json();
+      console.log({ data });
+      if (data.length > 0) {
+        const favourited = data[0].favourited;
+        if (favourited === 1) {
+          setToggleLike(true);
+        } else if (favourited === 0) {
+          setToggleDisLike(true);
+        }
+      }
+    }
+    getStats();
+  }, []);
 
   return (
     <div className={styles.container}>
