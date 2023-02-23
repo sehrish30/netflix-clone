@@ -31,14 +31,32 @@ const Navbar = () => {
     setShowDropDown((prev) => !prev);
   };
 
+  // const handleSignOut = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     await magic.user.logout();
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  //   router.replace("/login");
+  // };
   const handleSignOut = async (e) => {
     e.preventDefault();
+
     try {
-      await magic.user.logout();
-    } catch (err) {
-      console.log(err);
+      const response = await fetch("/api/logout", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${didToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+
+      const res = await response.json();
+    } catch (error) {
+      console.error("Error logging out", error);
+      router.push("/login");
     }
-    router.replace("/login");
   };
 
   const handleOnClickHome = (e) => {
@@ -48,7 +66,7 @@ const Navbar = () => {
 
   const handleOnClickMyList = (e) => {
     e.preventDefault();
-    router.push("/my-list");
+    router.push("/browse/my-list");
   };
 
   const handleShowDropDown = () => {

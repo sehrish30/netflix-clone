@@ -2,8 +2,10 @@ import Head from "next/head";
 import Banner from "../components/banner/banner.component.jsx";
 import SectionCards from "../components/card/section-cards.component.jsx";
 import Navbar from "../components/nav/navbar.component.jsx";
+import { verifyToken } from "../lib/utils.js";
 import { getVideos, getPopularVideos, getWatchItAgain } from "../lib/videos.js";
 import styles from "../styles/Home.module.css";
+import redirectUser from "../utils/redirectUser.js";
 
 export default function Home(initialProps) {
   const {
@@ -11,7 +13,7 @@ export default function Home(initialProps) {
     travelVideos,
     productivityVideos,
     popularVideos,
-    watchItAgainVideos,
+    watchItAgainVideos = [],
   } = initialProps;
 
   return (
@@ -51,10 +53,33 @@ export default function Home(initialProps) {
 }
 
 export async function getServerSideProps(ctx) {
-  console.log({ ctx });
-  //access the token from cookie
-  const userId = "did:ethr:0xa21820FCAba04e20fd4902d1275139BcD44081E6";
-  const token = ctx.req?.cookies?.token;
+  const { userId, token } = redirectUser(ctx);
+
+  if (!userId) {
+    return {
+      props: {},
+      redirect: [
+        {
+          destination: "/login",
+          permanent: false,
+        },
+      ],
+    };
+  }
+
+  console.log({ userId });
+
+  if (!userId) {
+    return {
+      props: {},
+      redirect: [
+        {
+          destination: "/login",
+          permanent: false,
+        },
+      ],
+    };
+  }
   // get videos on server side and pass it as props to page
   const disneyVideos = await getVideos("disney");
   const travelVideos = await getVideos("Productivity");
