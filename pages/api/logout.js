@@ -4,9 +4,9 @@ import { verifyToken } from "../../lib/utils";
 
 export default async function logout(req, res) {
   try {
-    if (!req.cookies.token)
+    if (!req.cookies.get("token")?.value)
       return res.status(401).json({ message: "User is not logged in" });
-    const token = req.cookies.token;
+    const token = req.cookies.get("token")?.value;
 
     const userId = await verifyToken(token);
     removeTokenCookie(res);

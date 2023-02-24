@@ -3,19 +3,12 @@ import {
   updateStats,
   insertStats,
 } from "../../lib/db/hasura";
-import { verifyToken } from "../../lib/utils";
+
+import { redirectUserReq } from "../../utils/redirectUser";
 
 export default async function statsHandler(req, res) {
   try {
-    const token = req.cookies.token;
-
-    if (!token) {
-      return res.status(403).json({
-        message: "Not authenticated",
-      });
-    }
-
-    const userId = verifyToken(token);
+    const { userId, token } = await redirectUserReq(req);
     const { videoId } = req.method === "POST" ? req.body : req.query;
 
     if (!videoId) {
@@ -67,6 +60,7 @@ export default async function statsHandler(req, res) {
       }
     }
   } catch (err) {
+    console.log(err);
     res.status(500).json({
       done: false,
       error: err,

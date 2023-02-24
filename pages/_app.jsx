@@ -6,19 +6,18 @@ import Loader from "../components/loading/loading.component";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    const handleComplete = () => {
+      setIsLoading(false);
+    };
+
+    // solve flicker problem by subscribing to login
+    // by subscribing to router events
+    router.events.on("routeChangeComplete", handleComplete);
+    router.events.on("routeChangeError", handleComplete);
     async function userIsLogged() {
-      const handleComplete = () => {
-        setIsLoading(false);
-      };
-
-      // solve flicker problem by subscribing to login
-      // by subscribing to router events
-      router.events.on("routeChangeComplete", handleComplete);
-      router.events.on("routeChangeError", handleComplete);
-
       const isLoggedIn = await magic.user.isLoggedIn();
       if (isLoggedIn) {
         router.push("/");
@@ -26,8 +25,8 @@ function MyApp({ Component, pageProps }) {
         router.push("/login");
       }
     }
-    userIsLogged();
-  }, []);
+    // userIsLogged();
+  }, [router.events]);
   return isLoading ? <Loader /> : <Component {...pageProps} />;
 }
 

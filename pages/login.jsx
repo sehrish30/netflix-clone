@@ -41,6 +41,7 @@ const Login = () => {
         setIsLoading(true);
         try {
           const isLoggedIn = await magic.user.isLoggedIn();
+
           if (!isLoggedIn) {
             setEmailSent(true);
             const didToken = await magic.auth.loginWithMagicLink({

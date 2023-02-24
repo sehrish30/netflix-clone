@@ -53,39 +53,26 @@ export default function Home(initialProps) {
 }
 
 export async function getServerSideProps(ctx) {
-  const { userId, token } = redirectUser(ctx);
+  const { userId, token } = await redirectUser(ctx);
 
-  if (!userId) {
-    return {
-      props: {},
-      redirect: [
-        {
-          destination: "/login",
-          permanent: false,
-        },
-      ],
-    };
-  }
+  // now no need to do this everywhere we can use middleware to run through all routes
+  // if (!userId) {
+  //   return {
+  //     props: {},
+  //     redirect: {
+  //       destination: "/login",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
 
-  console.log({ userId });
-
-  if (!userId) {
-    return {
-      props: {},
-      redirect: [
-        {
-          destination: "/login",
-          permanent: false,
-        },
-      ],
-    };
-  }
   // get videos on server side and pass it as props to page
   const disneyVideos = await getVideos("disney");
   const travelVideos = await getVideos("Productivity");
   const productivityVideos = await getVideos("travel");
   const popularVideos = await getPopularVideos();
   const watchItAgainVideos = await getWatchItAgain(userId, token);
+
   console.log({ watchItAgainVideos });
   return {
     props: {

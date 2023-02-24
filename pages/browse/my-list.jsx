@@ -29,17 +29,17 @@ const MyList = (initialProps) => {
 };
 
 export async function getServerSideProps(ctx) {
-  const { userId, token } = redirectUser(ctx);
+  const { userId, token } = await redirectUser(ctx);
 
-  if (!userId) {
-    return {
-      props: {},
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-    };
-  }
+  // if (!userId) {
+  //   return {
+  //     props: {},
+  //     redirect: {
+  //       destination: "/login",
+  //       permanent: false,
+  //     },
+  //   };
+  // }
   const videos = await getMyList(userId, token);
   return {
     props: {
