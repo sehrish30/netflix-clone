@@ -158,11 +158,14 @@ export default VideoIdPage;
  */
 export async function getStaticProps(context) {
   const videoId = context.params.videoId;
+
   const videoArray = await getYoutubeVideoById(videoId);
 
+  // Error: Error serializing `.video.channelTime` returned from `getStaticProps` in "/video/[videoId]"
   return {
     props: {
-      video: videoArray.length > 0 ? videoArray[0] : {},
+      video:
+        videoArray.length > 0 ? JSON.parse(JSON.stringify(videoArray[0])) : {},
     },
     revalidate: 10, // in sec
   };
