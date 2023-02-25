@@ -28,7 +28,7 @@ const redirectUser = async (ctx) => {
       );
 
       userId = verified.payload && verified.payload?.issuer;
-      console.log({ token: ctx.req.cookies.token, userId });
+
       return {
         userId,
         token,
