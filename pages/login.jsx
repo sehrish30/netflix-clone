@@ -48,6 +48,7 @@ const Login = () => {
               email,
               showUI: false,
             });
+            console.log({ didToken });
             if (didToken) {
               setEmailSent(false);
               const response = await fetch("/api/login", {

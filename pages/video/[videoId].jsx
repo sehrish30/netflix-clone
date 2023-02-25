@@ -178,6 +178,7 @@ export async function getStaticPaths() {
 
   return {
     paths,
+    //  new paths not returned by getStaticPaths
     fallback: "blocking",
   };
 }

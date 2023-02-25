@@ -1,5 +1,3 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-
 import { magicAdmin } from "../../lib/magic-server";
 // import jwt from "jsonwebtoken";
 import { createNewUser, isNewUser } from "../../lib/db/hasura";
@@ -58,7 +56,6 @@ export default async function handler(req, res) {
 
       res.status(200).json({ done: true });
     } catch (err) {
-      console.log("THIS IS ISSUE", err);
       res.status(500).send({ msg: err });
     }
   } else {

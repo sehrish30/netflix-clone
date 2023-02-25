@@ -53,7 +53,7 @@ export default function Home(initialProps) {
 }
 
 export async function getServerSideProps(ctx) {
-  const { userId, token } = await redirectUser(ctx);
+  const { userId, token } = (await redirectUser(ctx)) || {};
 
   // now no need to do this everywhere we can use middleware to run through all routes
   // if (!userId) {
@@ -71,9 +71,8 @@ export async function getServerSideProps(ctx) {
   const travelVideos = await getVideos("Productivity");
   const productivityVideos = await getVideos("travel");
   const popularVideos = await getPopularVideos();
-  const watchItAgainVideos = await getWatchItAgain(userId, token);
+  const watchItAgainVideos = (await getWatchItAgain(userId, token)) || [];
 
-  console.log({ watchItAgainVideos });
   return {
     props: {
       disneyVideos,

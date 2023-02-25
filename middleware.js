@@ -14,8 +14,6 @@ export async function middleware(request) {
 
     const { pathname } = request.nextUrl.clone();
 
-    console.log({ pathname, token });
-
     if (token) {
       const userId = await jwtVerify(
         token,
@@ -24,13 +22,12 @@ export async function middleware(request) {
 
       if (userId || pathname.includes("/api/login")) {
         return NextResponse.next();
+      } else {
+        return NextResponse.rewrite(new URL("/login", request.url));
       }
-      console.log({ pathname, token, userId });
     } else {
       return NextResponse.rewrite(new URL("/login", request.url));
     }
-
-    return NextResponse.next();
   } catch (err) {
     console.error({ err });
     return null;
@@ -47,9 +44,9 @@ export const config = {
      * - favicon.ico (favicon file)
      */
     "/",
-    "/login",
+    // "/login",
     "/browse/mylist",
-    // "/((?!api|_next/static|_next/image|static|favicon.ico).*)",
+    "/((?!api|_next/static|_next/image|static|favicon.ico).*)",
     "/video/:videoId*",
   ],
 };

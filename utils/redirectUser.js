@@ -17,6 +17,7 @@ import { jwtVerify } from "jose";
 
 const redirectUser = async (ctx) => {
   const token = ctx.req?.cookies?.token;
+
   let userId;
 
   try {
@@ -27,6 +28,7 @@ const redirectUser = async (ctx) => {
       );
 
       userId = verified.payload && verified.payload?.issuer;
+      console.log({ token: ctx.req.cookies.token, userId });
       return {
         userId,
         token,
@@ -59,7 +61,6 @@ export const redirectUserReq = async (req) => {
       return null;
     }
   } catch (err) {
-    console.log("SEHISIH ERR", err);
     console.error({ err });
     return null;
   }
