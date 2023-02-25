@@ -71,6 +71,7 @@ export async function getServerSideProps(ctx) {
   const travelVideos = await getVideos("Productivity");
   const productivityVideos = await getVideos("travel");
   const popularVideos = await getPopularVideos();
+
   const watchItAgainVideos = (await getWatchItAgain(userId, token)) || [];
 
   return {
@@ -78,7 +79,10 @@ export async function getServerSideProps(ctx) {
       disneyVideos,
       travelVideos,
       productivityVideos,
-      popularVideos,
+      //  deeply nested data from a 3rd party service. I use the following workaround to bypass this issue
+      // bacase channelTime was undefined getServerSideProps couldnot serialize it
+      // Reason: `undefined` cannot be serialized as JSON. Please use `null` or omit this value.
+      popularVideos: JSON.parse(JSON.stringify(popularVideos)),
       watchItAgainVideos,
     },
   };
