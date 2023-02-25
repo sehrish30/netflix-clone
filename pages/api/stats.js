@@ -87,7 +87,7 @@ export default async function statsHandler(req, res) {
 //         });
 //       }
 
-//       const decodedToken = jwt.verify(token, process.env.HASURA_JWT_SECRET);
+//       const decodedToken = jwt.verify(token, process.env.NEXT_PUBLIC_HASURA_JWT_SECRET);
 //       const userId = decodedToken.issuer;
 //       const { videoId } = req.body;
 

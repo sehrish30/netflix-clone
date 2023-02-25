@@ -13,7 +13,9 @@ export default async function handler(req, res) {
       // get the did token and get user meta data from magic
       const metadata = await magicAdmin.users.getMetadataByToken(DIDToken);
 
-      const secret = new TextEncoder().encode(process.env.HASURA_JWT_SECRET);
+      const secret = new TextEncoder().encode(
+        process.env.NEXT_PUBLIC_HASURA_JWT_SECRET
+      );
 
       // create jwt
       const token = await new SignJWT({
@@ -43,7 +45,7 @@ export default async function handler(req, res) {
       //       "x-hasura-user-id": `${metadata.issuer}`,
       //     },
       //   },
-      //   process.env.HASURA_JWT_SECRET
+      //   process.env.NEXT_PUBLIC_HASURA_JWT_SECRET
       // );
 
       // check if user exists

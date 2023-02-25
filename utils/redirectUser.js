@@ -24,7 +24,7 @@ const redirectUser = async (ctx) => {
     if (token) {
       const verified = await jwtVerify(
         token,
-        new TextEncoder().encode(process.env.HASURA_JWT_SECRET)
+        new TextEncoder().encode(process.env.NEXT_PUBLIC_HASURA_JWT_SECRET)
       );
 
       userId = verified.payload && verified.payload?.issuer;
@@ -49,7 +49,7 @@ export const redirectUserReq = async (req) => {
     if (token) {
       const verified = await jwtVerify(
         token,
-        new TextEncoder().encode(process.env.HASURA_JWT_SECRET)
+        new TextEncoder().encode(process.env.NEXT_PUBLIC_HASURA_JWT_SECRET)
       );
 
       userId = verified.payload && verified.payload?.issuer;

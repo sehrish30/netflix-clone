@@ -17,7 +17,7 @@ export async function middleware(request) {
     if (token) {
       const userId = await jwtVerify(
         token,
-        new TextEncoder().encode(process.env.HASURA_JWT_SECRET)
+        new TextEncoder().encode(process.env.NEXT_PUBLIC_HASURA_JWT_SECRET)
       );
 
       if (userId || pathname.includes("/api/login")) {
