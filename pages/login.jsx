@@ -39,7 +39,7 @@ const Login = () => {
       let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (email.match(regex)) {
         setIsLoading(true);
-        console.log("TRY");
+
         try {
           const isLoggedIn = await magic.user.isLoggedIn();
 
@@ -133,7 +133,7 @@ const Login = () => {
           <h1 className={styles.signinHeader}>Sign In</h1>
           <input
             className={styles.emailInput}
-            type="text"
+            type="email"
             placeholder="Email address"
             onChange={handleOnChangeEmail}
           />

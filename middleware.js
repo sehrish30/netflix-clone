@@ -11,7 +11,7 @@ export async function middleware(request) {
 
   try {
     const token = request ? request.cookies.get("token")?.value : null;
-
+    console.log("---------------------------------------------", token);
     const { pathname } = request.nextUrl.clone();
 
     if (token) {
@@ -23,16 +23,18 @@ export async function middleware(request) {
       if (userId || pathname.includes("/api/login")) {
         return NextResponse.next();
       } else {
-        const url = request.nextUrl.clone();
-        url.pathname = "/login";
-        return NextResponse.rewrite(url);
+        // const url = request.nextUrl.clone();
+        // url.pathname = "/login";
+        // return NextResponse.rewrite(url);
         // return NextResponse.rewrite(new URL("/login", request.url));
+        return NextResponse.redirect(new URL("/login", request.url));
       }
     } else {
       // return NextResponse.rewrite(new URL("/login", request.url));
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      return NextResponse.rewrite(url);
+      // const url = request.nextUrl.clone();
+      // url.pathname = "/login";
+      // return NextResponse.rewrite(url);
+      return NextResponse.redirect(new URL("/login", request.url));
     }
   } catch (err) {
     console.error({ err });

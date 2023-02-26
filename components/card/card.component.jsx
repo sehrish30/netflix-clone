@@ -41,7 +41,7 @@ const Card = ({
         <Image
           alt="new"
           src={imgSrc}
-          layout="fill"
+          fill
           className={styles.cardImg}
           onError={handleOnError}
         />
