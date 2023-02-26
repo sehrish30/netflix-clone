@@ -44,7 +44,7 @@ export const config = {
      * - favicon.ico (favicon file)
      */
     "/",
-    // "/login",
+    "/login",
     "/browse/mylist",
     "/((?!api|_next/static|_next/image|static|favicon.ico).*)",
     "/video/:videoId*",
