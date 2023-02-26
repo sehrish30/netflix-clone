@@ -59,15 +59,17 @@ const Login = () => {
                 },
               });
               const loggedInResponse = await response.json();
+              console.log("TESt loggedInResponse", loggedInResponse);
               if (loggedInResponse.done) {
-                router.replace("/");
+                router.push("/");
               } else {
                 setIsLoading(false);
                 setUserMessage("Something went wrong");
               }
             }
           } else {
-            router.replace("/");
+            console.log("TESt loggedIn already", didToken);
+            router.push("/");
           }
         } catch (err) {
           if (err instanceof RPCError) {
