@@ -62,7 +62,8 @@ const Login = () => {
               const loggedInResponse = await response.json();
               console.log("TESt loggedInResponse", loggedInResponse);
               if (loggedInResponse.done) {
-                router.push("/");
+                router.replace("/");
+                router.reload();
               } else {
                 setIsLoading(false);
                 setUserMessage("Something went wrong");
