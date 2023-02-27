@@ -1,6 +1,7 @@
 // middleware.ts
 import { NextResponse } from "next/server";
 import { jwtVerify } from "jose";
+import { verifyToken } from "./lib/utils";
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
@@ -13,15 +14,17 @@ export async function middleware(request) {
     const token = request ? request.cookies.get("token")?.value : null;
 
     const { pathname } = request.nextUrl.clone();
+    console.log("RUN MIDDLEWARE", request.url);
 
     if (token) {
-      const userId = await jwtVerify(
-        token,
-        new TextEncoder().encode(process.env.NEXT_PUBLIC_HASURA_JWT_SECRET),
-        {
-          algorithm: ["HS256"],
-        }
-      );
+      // const userId = await jwtVerify(
+      //   token,
+      //   new TextEncoder().encode(process.env.NEXT_PUBLIC_HASURA_JWT_SECRET),
+      //   {
+      //     algorithm: ["HS256"],
+      //   }
+      // );
+      const userId = await verifyToken(token);
 
       if (userId || pathname.includes("/api/login")) {
         return NextResponse.next();
