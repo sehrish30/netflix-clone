@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         .setIssuedAt()
         // .setIssuer("urn:example:issuer")
         // .setAudience("urn:example:audience")
-        .setExpirationTime("7d")
+        .setExpirationTime(Math.floor(Date.now() / 1000 + 7 * 24 * 60 * 60))
         .sign(secret);
       // const token = jwt.sign(
       //   {

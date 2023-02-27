@@ -4,20 +4,22 @@ import { verifyToken } from "../../lib/utils";
 
 export default async function logout(req, res) {
   try {
-    if (!req.cookies.get("token")?.value)
+    if (!req.cookies.token)
       return res.status(401).json({ message: "User is not logged in" });
-    const token = req.cookies.get("token")?.value;
+    const token = req.cookies.token;
 
     const userId = await verifyToken(token);
+    console.log("VERIFICATION FAILED", userId);
     removeTokenCookie(res);
     try {
       await magicAdmin.users.logoutByIssuer(userId);
     } catch (error) {
       console.error("Error occurred while logging out magic user", error);
     }
-    //redirects user to login page
-    res.writeHead(302, { Location: "/login" });
-    res.end();
+
+    res.status(200).json({
+      redirect: true,
+    });
   } catch (error) {
     console.error({ error });
     res.status(401).json({ message: "User is not logged in" });

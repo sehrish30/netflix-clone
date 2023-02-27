@@ -11,13 +11,16 @@ export async function middleware(request) {
 
   try {
     const token = request ? request.cookies.get("token")?.value : null;
-    console.log("---------------------------------------------", token);
+
     const { pathname } = request.nextUrl.clone();
 
     if (token) {
       const userId = await jwtVerify(
         token,
-        new TextEncoder().encode(process.env.NEXT_PUBLIC_HASURA_JWT_SECRET)
+        new TextEncoder().encode(process.env.NEXT_PUBLIC_HASURA_JWT_SECRET),
+        {
+          algorithm: ["HS256"],
+        }
       );
 
       if (userId || pathname.includes("/api/login")) {
@@ -27,14 +30,14 @@ export async function middleware(request) {
         // url.pathname = "/login";
         // return NextResponse.rewrite(url);
         // return NextResponse.rewrite(new URL("/login", request.url));
-        return NextResponse.redirect(new URL("/login", request.url));
+        return NextResponse.rewrite(new URL("/login", request.url));
       }
     } else {
       // return NextResponse.rewrite(new URL("/login", request.url));
       // const url = request.nextUrl.clone();
       // url.pathname = "/login";
       // return NextResponse.rewrite(url);
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.rewrite(new URL("/login", request.url));
     }
   } catch (err) {
     console.error({ err });
