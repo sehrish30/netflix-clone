@@ -39,16 +39,16 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Incremental Static Regeneration
 
-![main]("/public/readme/main.png")
+![main]("./static/readme/main.png")
 
 ## Ratings service
 
-![main]("/public/readme/ratings.png")
+![main]("./static/readme/ratings.png")
 
 ## Categories of videos to users
 
-![main]("/public/readme/categories.png")
+![main]("/static/readme/categories.png")
 
 ## Favourited Videos Page
 
-![main]("/public/readme/favorited.png")
+![main]("/static/readme/favorited.png")
