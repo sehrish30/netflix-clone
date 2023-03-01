@@ -4,6 +4,14 @@ export default function Document() {
   return (
     <Html>
       <Head>
+        <meta
+          name="google-site-verification"
+          content="rppTSWXwjMGcKA84TYDCoc-KGO7OL19sgCtZ9lMiA50"
+        />
+        <meta
+          name="description"
+          content="Netflix clone where you can login and get personalized videos"
+        ></meta>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
