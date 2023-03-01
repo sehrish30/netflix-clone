@@ -36,7 +36,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Authentication
 
 ![authentication]("/static/readme/authentication.png")
-<img src="static/readme/authentication.png" height=500 width=300/>
+<img src="public/static/readme/authentication.png" height=500 width=300/>
 
 ## Incremental Static Regeneration
 
