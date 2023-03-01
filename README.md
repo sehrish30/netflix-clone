@@ -36,11 +36,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ## Authentication
 
 ![authentication]("/static/readme/authentication.png")
-<img src="/static/readme/authentication.pn" alt="Alt text" title="Optional title">
+<img src="/static/readme/authentication.png" alt="Alt text" title="Optional title">
 
 ## Incremental Static Regeneration
 
 ![main]("./static/readme/main.png")
+<img src="/static/readme/main.png" alt="Alt text" title="Optional title">
 
 ## Ratings service
 
