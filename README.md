@@ -35,7 +35,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Authentication
 
-![authentication]("/public/readme/authentication.png")
+![authentication]("/static/readme/authentication.png")
+<img src="/static/readme/authentication.pn" alt="Alt text" title="Optional title">
 
 ## Incremental Static Regeneration
 
@@ -43,12 +44,12 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Ratings service
 
-![main]("./static/readme/ratings.png")
+![ratings]("./static/readme/ratings.png")
 
 ## Categories of videos to users
 
-![main]("/static/readme/categories.png")
+![categories]("/static/readme/categories.png")
 
 ## Favourited Videos Page
 
-![main]("/static/readme/favorited.png")
+![favorited]("/static/readme/favorited.png")
