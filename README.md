@@ -35,20 +35,20 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## Authentication
 
-<img src="public/static/readme/authentication.png" height=200 width=700/>
+<img src="public/static/readme/authentication.png" height=400 width=800/>
 
 ## Incremental Static Regeneration
 
-<img src="public/static/readme/main.png" height=200 width=700/>
+<img src="public/static/readme/main.png" height=400 width=800/>
 
 ## Ratings service
 
-<img src="public/static/readme/ratings.png" height=200 width=1000/>
+<img src="public/static/readme/ratings.png" height=400 width=800/>
 
 ## Categories of videos to users
 
-<img src="public/static/readme/categories.png" height=200 width=1000/>
+<img src="public/static/readme/categories.png" height=400 width=800/>
 
 ## Favourited Videos Page
 
-<img src="public/static/readme/favorited.png" height=200 width=1000/>
+<img src="public/static/readme/favorited.png" height=400 width=800/>
