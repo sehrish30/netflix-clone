@@ -35,7 +35,6 @@ const Login = () => {
 
   const handleLoginWithEmail = async () => {
     setUserMessage("");
-    console.log(router.asPath)
     if (email) {
       let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (email.match(regex)) {
