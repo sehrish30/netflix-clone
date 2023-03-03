@@ -62,7 +62,7 @@ const Login = () => {
               const loggedInResponse = await response.json();
               console.log("TESt loggedInResponse", loggedInResponse);
               if (loggedInResponse.done) {
-                router.replace("/");
+                router.push("/");
                 // router.reload();
               } else {
                 setIsLoading(false);
@@ -71,7 +71,7 @@ const Login = () => {
             }
           } else {
             console.log("TESt loggedIn already", didToken);
-            router.replace("/");
+            router.push("/");
           }
         } catch (err) {
           setIsLoading(false);
