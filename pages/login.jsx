@@ -41,8 +41,8 @@ const Login = () => {
         setIsLoading(true);
 
         try {
-          const isLoggedIn = await magic.user.isLoggedIn();
-
+          const isLoggedIn = await magic?.user?.isLoggedIn();
+          console.log({isLoggedIn})
           if (!isLoggedIn) {
             setEmailSent(true);
             const didToken = await magic.auth.loginWithMagicLink({
@@ -74,8 +74,8 @@ const Login = () => {
             router.replace("/");
           }
         } catch (err) {
+          setIsLoading(false);
           if (err instanceof RPCError) {
-            setIsLoading(false);
             switch (err.code) {
               case RPCErrorCode.MagicLinkFailedVerification:
                 console.log("MagicLinkFailedVerification", err);
@@ -93,6 +93,8 @@ const Login = () => {
               default:
                 console.log("UNKNOWN", err);
             }
+          }else{
+            setUserMessage("Authentication failed");
           }
         }
       } else {
