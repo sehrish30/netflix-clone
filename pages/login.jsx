@@ -63,7 +63,7 @@ const Login = () => {
               console.log("TESt loggedInResponse", loggedInResponse);
               if (loggedInResponse.done) {
                 router.replace("/");
-                router.reload();
+                // router.reload();
               } else {
                 setIsLoading(false);
                 setUserMessage("Something went wrong");
