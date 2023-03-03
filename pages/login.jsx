@@ -35,10 +35,12 @@ const Login = () => {
 
   const handleLoginWithEmail = async () => {
     setUserMessage("");
+    console.log(router.asPath)
     if (email) {
       let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (email.match(regex)) {
         setIsLoading(true);
+       
 
         try {
           const isLoggedIn = await magic?.user?.isLoggedIn();
@@ -62,8 +64,12 @@ const Login = () => {
               const loggedInResponse = await response.json();
               console.log("TESt loggedInResponse", loggedInResponse);
               if (loggedInResponse.done) {
+           
                 router.push("/");
-                // router.reload();
+                if(router.path === "/"){
+                  router.reload();
+                }
+  
               } else {
                 setIsLoading(false);
                 setUserMessage("Something went wrong");
