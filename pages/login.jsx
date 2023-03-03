@@ -66,7 +66,7 @@ const Login = () => {
               if (loggedInResponse.done) {
            
                 router.push("/");
-                if(router.path === "/"){
+                if(router.asPath === "/"){
                   router.reload();
                 }
   
