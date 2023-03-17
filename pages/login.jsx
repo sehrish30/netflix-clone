@@ -49,8 +49,9 @@ const Login = () => {
               email,
               showUI: false,
             });
-            console.log({ didToken });
+
             if (didToken) {
+              console.log({ didToken });
               setEmailSent(false);
               const response = await fetch("/api/login", {
                 method: "POST",
@@ -72,7 +73,6 @@ const Login = () => {
               }
             }
           } else {
-            console.log("TESt loggedIn already", didToken);
             router.push("/");
           }
         } catch (err) {
