@@ -39,11 +39,10 @@ const Login = () => {
       let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (email.match(regex)) {
         setIsLoading(true);
-       
 
         try {
           const isLoggedIn = await magic?.user?.isLoggedIn();
-          console.log({isLoggedIn})
+          console.log({ isLoggedIn });
           if (!isLoggedIn) {
             setEmailSent(true);
             const didToken = await magic.auth.loginWithMagicLink({
@@ -63,12 +62,10 @@ const Login = () => {
               const loggedInResponse = await response.json();
               console.log("TESt loggedInResponse", loggedInResponse);
               if (loggedInResponse.done) {
-           
                 router.push("/");
-                if(router.asPath === "/"){
+                if (router.asPath === "/") {
                   router.reload();
                 }
-  
               } else {
                 setIsLoading(false);
                 setUserMessage("Something went wrong");
@@ -79,6 +76,7 @@ const Login = () => {
             router.push("/");
           }
         } catch (err) {
+          console.log(err);
           setIsLoading(false);
           if (err instanceof RPCError) {
             switch (err.code) {
@@ -98,7 +96,7 @@ const Login = () => {
               default:
                 console.log("UNKNOWN", err);
             }
-          }else{
+          } else {
             setUserMessage("Authentication failed");
           }
         }
@@ -144,6 +142,7 @@ const Login = () => {
             type="email"
             placeholder="Email address"
             onChange={handleOnChangeEmail}
+            id="email"
           />
           <p className={styles.userMsg}>{userMessage}</p>
 

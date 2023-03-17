@@ -103,11 +103,13 @@ const VideoIdPage = (initialProps) => {
           type="text/html"
           width="100%"
           height="360"
-          // extra restrictions to the content
+          // restrict browser capabilities
           sandbox="allow-scripts allow-same-origin"
           src={`https://www.youtube.com/embed/${videoId}?autoplay=0&origin=http://example.com&controls=0&rel=1`}
           // defer loading iframe
           loading="lazy"
+          // disable potentially unsecured browser features
+          allow="camera 'none'; microphone 'none'; payment 'none'"
         ></iframe>
         <div className={styles.likeDislikeBtnWrapper}>
           <div className={styles.likeBtnWrapper}>
