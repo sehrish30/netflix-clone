@@ -39,10 +39,11 @@ const Login = () => {
       let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
       if (email.match(regex)) {
         setIsLoading(true);
+       
 
         try {
-          const isLoggedIn = await magic.user.isLoggedIn();
-
+          const isLoggedIn = await magic?.user?.isLoggedIn();
+          console.log({isLoggedIn})
           if (!isLoggedIn) {
             setEmailSent(true);
             const didToken = await magic.auth.loginWithMagicLink({
@@ -62,8 +63,12 @@ const Login = () => {
               const loggedInResponse = await response.json();
               console.log("TESt loggedInResponse", loggedInResponse);
               if (loggedInResponse.done) {
-                router.replace("/");
-                router.reload();
+           
+                router.push("/");
+                if(router.asPath === "/"){
+                  router.reload();
+                }
+  
               } else {
                 setIsLoading(false);
                 setUserMessage("Something went wrong");
@@ -71,11 +76,11 @@ const Login = () => {
             }
           } else {
             console.log("TESt loggedIn already", didToken);
-            router.replace("/");
+            router.push("/");
           }
         } catch (err) {
+          setIsLoading(false);
           if (err instanceof RPCError) {
-            setIsLoading(false);
             switch (err.code) {
               case RPCErrorCode.MagicLinkFailedVerification:
                 console.log("MagicLinkFailedVerification", err);
@@ -93,6 +98,8 @@ const Login = () => {
               default:
                 console.log("UNKNOWN", err);
             }
+          }else{
+            setUserMessage("Authentication failed");
           }
         }
       } else {

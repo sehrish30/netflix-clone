@@ -41,14 +41,18 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 <img src="public/static/readme/main.png" height=400 width=800/>
 
-## Ratings service
+## Like and dislike videos
 
-<img src="public/static/readme/ratings.png" height=400 width=800/>
+<img src="public/static/readme/like-dislike.png" height=400 width=800/>
 
 ## Categories of videos to users
 
-<img src="public/static/readme/categories.png" height=400 width=800/>
+<img src="public/static/readme/categories-videos.png" height=400 width=800/>
 
-## Favourited Videos Page
+## Favourited Videos Page For Each User
 
 <img src="public/static/readme/favorited.png" height=400 width=800/>
+
+## Scroll Videos Lists
+
+<img src="public/static/readme/scroll.png" height=400 width=800/>
