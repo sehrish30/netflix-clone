@@ -21,7 +21,7 @@ export async function middleware(request) {
       "RUN MIDDLEWARE",
       token,
       "HEHE",
-      cookies.get("token")?.value,
+      request.cookies.get("token")?.value,
       "HUH",
       cookies.get("_vercel_jwt")?.value
     );
