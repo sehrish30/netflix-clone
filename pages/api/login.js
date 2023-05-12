@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const auth = req.headers.authorization;
     const DIDToken = auth ? auth.substr(7) : "";
-
+    console.log({ DIDToken });
     try {
       // get the did token and get user meta data from magic
       const metadata = await magicAdmin.users.getMetadataByToken(DIDToken);
@@ -16,7 +16,7 @@ export default async function handler(req, res) {
       const secret = new TextEncoder().encode(
         process.env.NEXT_PUBLIC_HASURA_JWT_SECRET
       );
-
+      console.log({ secret: process.env.NEXT_PUBLIC_HASURA_JWT_SECRET });
       // create jwt
       const token = await new SignJWT({
         ...metadata,
@@ -34,6 +34,7 @@ export default async function handler(req, res) {
         // .setAudience("urn:example:audience")
         .setExpirationTime(Math.floor(Date.now() / 1000 + 7 * 24 * 60 * 60))
         .sign(secret);
+      console.log({ token });
       // const token = jwt.sign(
       //   {
       //     ...metadata,
@@ -50,7 +51,7 @@ export default async function handler(req, res) {
 
       // check if user exists
       const isNewUserQuery = await isNewUser(token, metadata.issuer);
-
+      console.log({ isNewUserQuery });
       // set a cookie
       setTokenCookie(token, res);
 
