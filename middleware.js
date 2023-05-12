@@ -11,20 +11,17 @@ export async function middleware(request) {
   // high-level HTTP Cookie abstractions
   const cookies = new RequestCookies(request.headers);
   try {
-    JSON.parse(req.cookies.get("token")?.value || "false");
-    const token = request
-      ? JSON.parse(req.cookies.get("token")?.value || "false") ||
-        request.cookies?._vercel_jwt?.value
-      : null;
+    const token =
+      request.cookies.get("token")?.value || cookies?.get("token")?.value;
 
     const { pathname } = request.nextUrl.clone();
     console.log(
       "RUN MIDDLEWARE",
-      request.url,
       token,
       request.cookies,
-      JSON.parse(req.cookies.get("token")?.value || "false"),
-      cookies.get("token")?.value
+      cookies.get("token")?.value,
+      "HEHE",
+      JSON.parse(request.cookies.get("token")?.value || "false")
     );
 
     if (token) {
