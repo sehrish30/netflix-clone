@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { verifyToken } from "./lib/utils";
+import { RequestCookies } from "@edge-runtime/cookies";
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(request) {
@@ -7,10 +8,11 @@ export async function middleware(request) {
   //access the token from cookie
   // const token = request?.cookies?.token;
   // const userId = verifyToken(token);
-
+  const cookies = new RequestCookies(req.headers);
   try {
+    JSON.parse(req.cookies.get("token")?.value || "false");
     const token = request
-      ? request.cookies.get("token")?.value ||
+      ? JSON.parse(req.cookies.get("token")?.value || "false") ||
         request.cookies?._vercel_jwt?.value
       : null;
 
@@ -20,7 +22,8 @@ export async function middleware(request) {
       request.url,
       token,
       request.cookies,
-      request.cookies?._vercel_jwt?.value
+      JSON.parse(req.cookies.get("token")?.value || "false"),
+      cookies.get("token")?.value
     );
 
     if (token) {

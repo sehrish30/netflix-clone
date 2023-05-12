@@ -9,6 +9,11 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@edge-runtime/cookies@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/@edge-runtime/cookies/-/cookies-3.1.0.tgz"
+  integrity sha512-nYoxDMk5a+YoRun8cNGgDXZNjy3/VTzmrIXGMT83cLPJ7eaTA8CKXYIp2n8gKEoH6M2aowC9O8gaU5Ry9vgVmA==
+
 "@emotion/is-prop-valid@^0.8.2":
   version "0.8.8"
   resolved "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz"
