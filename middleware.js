@@ -21,7 +21,9 @@ export async function middleware(request) {
       request.cookies,
       cookies.get("token")?.value,
       "HEHE",
-      JSON.parse(request.cookies.get("token")?.value || "false")
+      JSON.parse(request.cookies.get("token")?.value || "false"),
+      "HUH",
+      cookies.get("_vercel_jwt")?.value
     );
 
     if (token) {
