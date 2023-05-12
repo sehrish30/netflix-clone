@@ -10,7 +10,8 @@ export async function middleware(request) {
 
   try {
     const token = request
-      ? request.cookies.get("token")?.value || request.cookies._vercel_jwt.value
+      ? request.cookies.get("token")?.value ||
+        request.cookies?._vercel_jwt?.value
       : null;
 
     const { pathname } = request.nextUrl.clone();
