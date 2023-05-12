@@ -8,7 +8,8 @@ export async function middleware(request) {
   //access the token from cookie
   // const token = request?.cookies?.token;
   // const userId = verifyToken(token);
-  const cookies = new RequestCookies(req.headers);
+  // high-level HTTP Cookie abstractions
+  const cookies = new RequestCookies(request.headers);
   try {
     JSON.parse(req.cookies.get("token")?.value || "false");
     const token = request
