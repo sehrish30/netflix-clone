@@ -12,7 +12,13 @@ export async function middleware(request) {
     const token = request ? request.cookies.get("token")?.value : null;
 
     const { pathname } = request.nextUrl.clone();
-    console.log("RUN MIDDLEWARE", request.url, token);
+    console.log(
+      "RUN MIDDLEWARE",
+      request.url,
+      token,
+      request.cookies,
+      JSON.stringify(request.cookies)
+    );
 
     if (token) {
       // const userId = await jwtVerify(
