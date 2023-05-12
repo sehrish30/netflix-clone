@@ -9,7 +9,7 @@ export default async function logout(req, res) {
     const token = req.cookies.token;
 
     const userId = await verifyToken(token);
-    console.log("VERIFICATION FAILED", userId);
+    console.log("VERIFICATION", userId, token);
     removeTokenCookie(res);
     try {
       await magicAdmin.users.logoutByIssuer(userId);
