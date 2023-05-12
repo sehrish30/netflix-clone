@@ -64,9 +64,9 @@ const Login = () => {
               console.log("TESt loggedInResponse", loggedInResponse);
               if (loggedInResponse.done) {
                 router.push("/");
-                if (router.asPath === "/") {
-                  router.reload();
-                }
+                // if (router.asPath === "/") {
+                //   router.reload();
+                // }
               } else {
                 setIsLoading(false);
                 setUserMessage("Something went wrong");
