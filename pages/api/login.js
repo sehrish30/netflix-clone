@@ -7,6 +7,7 @@ import { SignJWT } from "jose";
 export default async function handler(req, res) {
   if (req.method === "POST") {
     const auth = req.headers.authorization;
+    console.log({ auth });
     const DIDToken = auth ? auth.substr(7) : "";
     console.log({ DIDToken });
     try {
