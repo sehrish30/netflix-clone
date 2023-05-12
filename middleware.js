@@ -1,6 +1,4 @@
-// middleware.ts
 import { NextResponse } from "next/server";
-import { jwtVerify } from "jose";
 import { verifyToken } from "./lib/utils";
 
 // This function can be marked `async` if using `await` inside
@@ -14,7 +12,7 @@ export async function middleware(request) {
     const token = request ? request.cookies.get("token")?.value : null;
 
     const { pathname } = request.nextUrl.clone();
-    console.log("RUN MIDDLEWARE", request.url);
+    console.log("RUN MIDDLEWARE", request.url, token);
 
     if (token) {
       // const userId = await jwtVerify(
@@ -29,18 +27,18 @@ export async function middleware(request) {
       if (userId || pathname.includes("/api/login")) {
         return NextResponse.next();
       } else {
-        // const url = request.nextUrl.clone();
-        // url.pathname = "/login";
-        // return NextResponse.rewrite(url);
+        const url = request.nextUrl.clone();
+        url.pathname = "/login";
+        return NextResponse.rewrite(url);
+        // // return NextResponse.rewrite(new URL("/login", request.url));
         // return NextResponse.rewrite(new URL("/login", request.url));
-        return NextResponse.rewrite(new URL("/login", request.url));
       }
     } else {
-      // return NextResponse.rewrite(new URL("/login", request.url));
-      // const url = request.nextUrl.clone();
-      // url.pathname = "/login";
-      // return NextResponse.rewrite(url);
       return NextResponse.rewrite(new URL("/login", request.url));
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      // return NextResponse.rewrite(url);
+      // return NextResponse.rewrite(new URL("/login", request.url));
     }
   } catch (err) {
     console.error({ err });
@@ -60,7 +58,7 @@ export const config = {
     "/",
     "/login",
     "/browse/mylist",
-    "/((?!api|_next/static|_next/image|static|favicon.ico).*)",
+    "/((?!api|_next/static|_next/image|static|favicon.ico).*)", // excluding images or static files from nextjs
     "/video/:videoId*",
   ],
 };

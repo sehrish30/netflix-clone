@@ -73,6 +73,7 @@ const Login = () => {
               }
             }
           } else {
+            console.log("LOGGED IN");
             router.push("/");
           }
         } catch (err) {
