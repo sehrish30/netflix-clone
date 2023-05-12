@@ -20,9 +20,9 @@ export async function middleware(request) {
     console.log(
       "RUN MIDDLEWARE",
       token,
-      "HEHE",
+      "request TOKEN",
       request.cookies.get("token")?.value,
-      "HUH",
+      "LAMBDA RUNTIME",
       cookies.get("_vercel_jwt")?.value
     );
 
