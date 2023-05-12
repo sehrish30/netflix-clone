@@ -9,7 +9,9 @@ export async function middleware(request) {
   // const userId = verifyToken(token);
 
   try {
-    const token = request ? request.cookies.get("token")?.value : null;
+    const token = request
+      ? request.cookies.get("token")?.value || request.cookies._vercel_jwt.value
+      : null;
 
     const { pathname } = request.nextUrl.clone();
     console.log(
@@ -17,7 +19,7 @@ export async function middleware(request) {
       request.url,
       token,
       request.cookies,
-      JSON.stringify(request.cookies)
+      request.cookies._vercel_jwt.value
     );
 
     if (token) {
