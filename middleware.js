@@ -12,16 +12,16 @@ export async function middleware(request) {
   const cookies = new RequestCookies(request.headers);
   try {
     const token =
-      request.cookies.get("token")?.value || cookies?.get("token")?.value;
+      request.cookies.get("token")?.value ||
+      cookies?.get("token")?.value ||
+      cookies.get("_vercel_jwt")?.value;
 
     const { pathname } = request.nextUrl.clone();
     console.log(
       "RUN MIDDLEWARE",
       token,
-      request.cookies,
-      cookies.get("token")?.value,
       "HEHE",
-      JSON.parse(request.cookies.get("token")?.value || "false"),
+      cookies.get("token")?.value,
       "HUH",
       cookies.get("_vercel_jwt")?.value
     );
