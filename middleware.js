@@ -20,7 +20,7 @@ export async function middleware(request) {
       request.url,
       token,
       request.cookies,
-      request.cookies._vercel_jwt.value
+      request.cookies?._vercel_jwt?.value
     );
 
     if (token) {
