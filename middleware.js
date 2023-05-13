@@ -19,7 +19,7 @@ export async function middleware(request) {
     const { pathname } = request.nextUrl.clone();
     console.log(
       "RUN MIDDLEWARE",
-      token,
+      request.url,
       "request TOKEN",
       request.cookies.get("token")?.value,
       "LAMBDA RUNTIME",
