@@ -45,7 +45,7 @@ export async function middleware(request) {
       }
     } else {
       console.log("UNTOKEN MAIN");
-      return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.rewrite(new URL("/login", request.url));
       // const url = request.nextUrl.clone();
       // url.pathname = "/login";
       // return NextResponse.rewrite(url);
