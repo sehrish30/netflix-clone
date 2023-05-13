@@ -23,7 +23,9 @@ export async function middleware(request) {
       "request TOKEN",
       request.cookies.get("token")?.value,
       "LAMBDA RUNTIME",
-      cookies.get("_vercel_jwt")?.value
+      cookies.get("_vercel_jwt")?.value,
+      "LAMDA MAIN",
+      cookies?.get("token")?.value
     );
 
     if (token) {

@@ -3,6 +3,7 @@ import { magicAdmin } from "../../lib/magic-server";
 import { createNewUser, isNewUser } from "../../lib/db/hasura";
 import { setTokenCookie } from "../../lib/cookies";
 import { SignJWT } from "jose";
+import { ResponseCookies } from "@edge-runtime/cookies";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -55,6 +56,8 @@ export default async function handler(req, res) {
 
       // set a cookie
       setTokenCookie(token, res);
+      const cookies = new ResponseCookies(new Headers());
+      cookies.set("token", token, { maxAge: MAX_AGE });
 
       isNewUserQuery && (await createNewUser(token, metadata));
 
