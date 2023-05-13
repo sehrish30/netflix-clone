@@ -59,6 +59,7 @@ export default async function handler(req, res) {
       setTokenCookie(token, res);
       const cookies = new ResponseCookies(new Headers());
       cookies.set("token", token, { maxAge: MAX_AGE });
+      console.log("COOKIES", cookies.has("token"));
 
       isNewUserQuery && (await createNewUser(token, metadata));
 
