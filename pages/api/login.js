@@ -55,6 +55,7 @@ export default async function handler(req, res) {
       const isNewUserQuery = await isNewUser(token, metadata.issuer);
 
       // set a cookie
+      const MAX_AGE = 7 * 24 * 60 * 60;
       setTokenCookie(token, res);
       const cookies = new ResponseCookies(new Headers());
       cookies.set("token", token, { maxAge: MAX_AGE });

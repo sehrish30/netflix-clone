@@ -44,15 +44,13 @@ export async function middleware(request) {
         const url = request.nextUrl.clone();
         url.pathname = "/login";
         return NextResponse.rewrite(url);
-        // // return NextResponse.rewrite(new URL("/login", request.url));
         // return NextResponse.rewrite(new URL("/login", request.url));
       }
     } else {
       return NextResponse.rewrite(new URL("/login", request.url));
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
+      // const url = request.nextUrl.clone();
+      // url.pathname = "/login";
       // return NextResponse.rewrite(url);
-      // return NextResponse.rewrite(new URL("/login", request.url));
     }
   } catch (err) {
     console.error({ err });
