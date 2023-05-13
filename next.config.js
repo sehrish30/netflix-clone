@@ -5,6 +5,7 @@ const nextConfig = {
   images: {
     domains: ["images.unsplash.com", "i.ytimg.com"],
   },
+  trailingSlash: true,
 };
 
 module.exports = nextConfig;
