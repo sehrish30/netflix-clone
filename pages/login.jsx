@@ -63,10 +63,10 @@ const Login = () => {
               const loggedInResponse = await response.json();
               console.log("TESt loggedInResponse", loggedInResponse);
               if (loggedInResponse.done) {
-                router.push("/");
-                // if (router.asPath === "/") {
-                //   router.reload();
-                // }
+                router.replace("/");
+                if (router.asPath === "/") {
+                  router.reload();
+                }
               } else {
                 setIsLoading(false);
                 setUserMessage("Something went wrong");
