@@ -37,16 +37,18 @@ export async function middleware(request) {
       if (userId || pathname.includes("/api/login")) {
         return NextResponse.next();
       } else {
-        const url = request.nextUrl.clone();
-        url.pathname = "/login";
-        return NextResponse.rewrite(url);
-        // return NextResponse.rewrite(new URL("/login", request.url));
+        // console.log("UNTOKEN");
+        // const url = request.nextUrl.clone();
+        // url.pathname = "/login";
+        // return NextResponse.rewrite(url);
+        return NextResponse.redirect(new URL("/login", request.url));
       }
     } else {
-      // return NextResponse.rewrite(new URL("/login", request.url));
-      const url = request.nextUrl.clone();
-      url.pathname = "/login";
-      return NextResponse.rewrite(url);
+      console.log("UNTOKEN MAIN");
+      return NextResponse.redirect(new URL("/login", request.url));
+      // const url = request.nextUrl.clone();
+      // url.pathname = "/login";
+      // return NextResponse.rewrite(url);
     }
   } catch (err) {
     console.error({ err });
