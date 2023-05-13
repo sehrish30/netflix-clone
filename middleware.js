@@ -12,9 +12,7 @@ export async function middleware(request) {
   const cookies = new RequestCookies(request.headers);
   try {
     const token =
-      request.cookies.get("token")?.value ||
-      cookies.get("_vercel_jwt")?.value ||
-      cookies.get("token")?.value;
+      request.cookies.get("token")?.value || cookies.get("token")?.value;
 
     const { pathname } = request.nextUrl.clone();
     console.log(
@@ -22,8 +20,6 @@ export async function middleware(request) {
       request.url,
       "request TOKEN",
       request.cookies.get("token")?.value,
-      "LAMBDA RUNTIME",
-      cookies.get("_vercel_jwt")?.value,
       "LAMDA MAIN",
       cookies?.get("token")?.value
     );
