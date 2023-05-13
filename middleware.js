@@ -43,10 +43,10 @@ export async function middleware(request) {
         // return NextResponse.rewrite(new URL("/login", request.url));
       }
     } else {
-      return NextResponse.rewrite(new URL("/login", request.url));
-      // const url = request.nextUrl.clone();
-      // url.pathname = "/login";
-      // return NextResponse.rewrite(url);
+      // return NextResponse.rewrite(new URL("/login", request.url));
+      const url = request.nextUrl.clone();
+      url.pathname = "/login";
+      return NextResponse.rewrite(url);
     }
   } catch (err) {
     console.error({ err });
